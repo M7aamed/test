@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Quizer/assets/bootstrap-v4/bootstrap-4.6.2-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/Quizer/assets/css/login-style.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/material-design-iconic-font@2.2.0/dist/css/material-design-iconic-font.min.css">
+
+    <title>Login</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="parent">
+            <div class="form">
+                <h1>Sign up</h1>
+                <form action="">
+
+                    <div class="form-group">
+                        <label for="fullname"> <i class="zmdi zmdi-fullname"></i> </label>
+                        <input type="text" name="fullName" id="fullname" placeholder="Full Name">
+                        <p class="msg" id="fullNameError"></p>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="fullname"> <i class="zmdi zmdi-username"></i> </label>
+                        <input type="text" name="userName" id="" placeholder="User Name">
+                        <p class="msg" id="fullNameError"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fullname"> <i class="zmdi zmdi-email"></i> </label>
+                        <input type="email" name="email" id="" placeholder="Your Email">
+                        <p class="msg" id="fullNameError"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fullname"> <i class="zmdi zmdi-password"></i> </label>
+                        <input type="password" name="password" id="" placeholder="Password">
+                        <p class="msg" id="fullNameError"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fullname"> <i class="zmdi zmdi-rpassword"></i> </label>
+                        <input type="password" name="conPassword" id="" placeholder="Repeat your password ">
+                        <p class="msg" id="fullNameError"></p>
+                    </div>
+
+                    <button class="btn btn-primary" id="registerBtn" type="button">Register</button>
+                </form>
+            </div>
+
+            <div class="image">
+                <img src="/Quizer/assets/image/image1.png" class="loginImage" alt="login image">
+                <a href="/Quizer/app/login/">I am already member</a>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="/Quizer/assets/bootstrap-v4/bootstrap-4.6.2-dist/js/popper.min.js "></script>
+    <script src="/Quizer/assets/bootstrap-v4/bootstrap-4.6.2-dist/js/jquery-3.6.4.min.js "></script>
+    <script src="/Quizer/assets/bootstrap-v4/bootstrap-4.6.2-dist/js/bootstrap.js "></script>
+
+    <script>
+        document.getElementById("registerBtn").addEventListener("click", async () => {
+            const fullName = document.querySelector("input[name='fullName']").value.trim();
+            const userName = document.querySelector("input[name='userName']").value.trim();
+            const email = document.querySelector("input[name='email']").value.trim();
+            const password = document.querySelector("input[name='password']").value.trim();
+            const conPassword = document.querySelector("input[name='conPassword']").value.trim();
+
+            if (!fullName || !userName || !email || !password || !conPassword) {
+                alert("Please fill in all fields!");
+                return;
+            }
+
+            if (password !== conPassword) {
+                alert("Passwords do not match!");
+                return;
+            }
+
+            try {
+                const res = await fetch("http://localhost:3000/register", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ fullName, userName, email, password, conPassword })
+                });
+
+                const data = await res.json();
+                alert(data.msg || "Registered successfully!");
+                if (data.success) {
+                window.location.href = "../login"; 
+                     } 
+                    }catch (err) {
+                alert("Error: " + err.message);
+                console.log(err.message);
+            }
+        });
+    </script>
+</body>
+
+</html>

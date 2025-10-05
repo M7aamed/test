@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Quizer/assets/bootstrap-v4/bootstrap-4.6.2-dist/css/bootstrap.css">
+    <link rel="shortcut icon" href="/Quizer/assets/image/Icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/Quizer/assets/css/mainPage.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/material-design-iconic-font@2.2.0/dist/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Quiz Dashboard</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header bg-light shadow mt-4">
+            <div class="icon">
+                <img src="/Quizer/assets/image/avatar.png" loading="lazy" alt="user-avatar" title="user-avatar">
+                <label id="count" class="text-black-50">
+                    <span class="now"><%= userName %></span> &#47; 
+                    <span class="total">student</span>
+                </label>
+            </div>
+
+            <div class="logout">
+                <a href="#" class="text-danger">Log out</a>
+            </div>
+        </div>
+
+        <div class="quizs mt-5 text-center text-secondary">
+            <h4>Welcome, <%= userName %> 👋</h4>
+            <p>Your quizzes will appear here soon.</p>
+        </div>
+    </div>
+
+    <script src="/Quizer/assets/bootstrap-v4/bootstrap-4.6.2-dist/js/popper.min.js"></script>
+    <script src="/Quizer/assets/bootstrap-v4/bootstrap-4.6.2-dist/js/jquery-3.6.4.min.js"></script>
+    <script src="/Quizer/assets/bootstrap-v4/bootstrap-4.6.2-dist/js/bootstrap.js"></script>
+    <script src="/Quizer/assets/pages/mainPage.js"></script>
+</body>
+
+</html>

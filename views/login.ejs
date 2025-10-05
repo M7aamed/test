@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Quizer</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="../public/Quizer/assets/bootstrap-v4/bootstrap-4.6.2-dist/css/bootstrap.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../public/Quizer/assets/css/login-style.css">
+  <!-- Icons -->
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/material-design-iconic-font@2.2.0/dist/css/material-design-iconic-font.min.css">
+
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .parent {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .image img {
+      width: 400px;
+      height: auto;
+    }
+
+    .form {
+      background: #fff;
+      padding: 40px 50px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      margin-left: 50px;
+    }
+
+    .form h1 {
+      font-weight: 600;
+      margin-bottom: 25px;
+      color: #007bff;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 25px;
+    }
+
+    .form-group label i {
+      position: absolute;
+      left: 10px;
+      top: 12px;
+      font-size: 18px;
+      color: #007bff;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 12px 12px 40px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    .form-group input:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .links {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .links a {
+      text-decoration: none;
+      color: #007bff;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container parent">
+    <div class="image">
+      <img src="../public/Quizer/assets/image/signin-image.png" alt="Login Illustration">
+      <div class="links mt-3">
+        <a href="/register">Create Account</a>
+      </div>
+    </div>
+
+    <div class="form">
+      <form id="loginForm">
+        <h1>Sign In</h1>
+
+        <% if (typeof error !== 'undefined' && error) { %>
+          <div class="alert alert-danger"><%= error %></div>
+        <% } %>
+
+        <div class="form-group">
+          <label for="email"><i class="zmdi zmdi-email"></i></label>
+          <input type="email" id="email" name="email" placeholder="Your Email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password"><i class="zmdi zmdi-lock"></i></label>
+          <input type="password" id="password" name="password" placeholder="Password" required>
+        </div>
+
+        <div class="form-group form-check">
+          <input type="checkbox" id="remember" class="form-check-input">
+          <label for="remember" class="form-check-label">Remember me</label>
+        </div>
+
+        <button type="button" class="btn btn-primary" id="btnlogin">Log in</button>
+
+        <div class="links">
+          <a href="/reset-password">Forgot password?</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="../public/Quizer/assets/bootstrap-v4/bootstrap-4.6.2-dist/js/jquery-3.6.4.min.js"></script>
+  <script src="../public/Quizer/assets/bootstrap-v4/bootstrap-4.6.2-dist/js/bootstrap.js"></script>
+
+  <script>
+    document.getElementById("btnlogin").addEventListener("click", async () => {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (!email || !password) {
+        alert("Please fill in both fields.");
+        return;
+      }
+
+      try {
+        const res = await fetch("/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          window.location.href = "/views/mainpage.ejs"; // لو اللوجين نجح يرجع للصفحة الرئيسية
+        } else {
+          alert(data.msg || "Invalid email or password");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Something went wrong while logging in!");
+      }
+    });
+  </script>
+
+</body>
+
+</html>
