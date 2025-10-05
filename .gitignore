@@ -1,0 +1,58 @@
+# ========================================
+# Node.js and Express Ignore Rules
+# ========================================
+
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build and cache
+dist/
+build/
+.cache/
+.tmp/
+logs/
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE and editor folders
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ========================================
+# Project specific
+# ========================================
+
+# Public images and assets
+/public/Quizer/assets/image/
+/public/Quizer/assets/bootstrap-v4/bootstrap-4.6.2-dist/js/
+/public/Quizer/assets/bootstrap-v4/bootstrap-4.6.2-dist/css/
+
+# Any unnecessary folders
+/New folder/
+
+# Backup or temporary files
+*.bak
+*.tmp
+~$*
+
+# ========================================
+# OS generated files
+# ========================================
+ehthumbs.db
+Desktop.ini
