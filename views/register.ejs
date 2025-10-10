@@ -1,108 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | Quizer</title>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/Quizer/assets/bootstrap-v4/bootstrap-4.6.2-dist/css/bootstrap.css">
-    <link rel="stylesheet" href="/Quizer/assets/css/login-style.css">
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/material-design-iconic-font@2.2.0/dist/css/material-design-iconic-font.min.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/css/bootstrap.css" />
 
-    <title>Login</title>
-</head>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/login-style.css" />
 
-<body>
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/material-design-iconic-font@2.2.0/dist/css/material-design-iconic-font.min.css"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+        font-family: "Poppins", sans-serif;
+      }
 
-    <div class="container">
-        <div class="parent">
-            <div class="form">
-                <h1>Sign up</h1>
-                <form action="">
+      .parent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        gap: 60px;
+      }
 
-                    <div class="form-group">
-                        <label for="fullname"> <i class="zmdi zmdi-fullname"></i> </label>
-                        <input type="text" name="fullName" id="fullname" placeholder="Full Name">
-                        <p class="msg" id="fullNameError"></p>
-                    </div>
+      .image img {
+        width: 400px;
+        height: auto;
+      }
 
+      .form {
+        background: #fff;
+        padding: 40px 50px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      }
 
-                    <div class="form-group">
-                        <label for="fullname"> <i class="zmdi zmdi-username"></i> </label>
-                        <input type="text" name="userName" id="" placeholder="User Name">
-                        <p class="msg" id="fullNameError"></p>
-                    </div>
+      .form h1 {
+        font-weight: 600;
+        margin-bottom: 25px;
+        color: #007bff;
+      }
 
-                    <div class="form-group">
-                        <label for="fullname"> <i class="zmdi zmdi-email"></i> </label>
-                        <input type="email" name="email" id="" placeholder="Your Email">
-                        <p class="msg" id="fullNameError"></p>
-                    </div>
+      .form-group {
+        position: relative;
+        margin-bottom: 25px;
+      }
 
-                    <div class="form-group">
-                        <label for="fullname"> <i class="zmdi zmdi-password"></i> </label>
-                        <input type="password" name="password" id="" placeholder="Password">
-                        <p class="msg" id="fullNameError"></p>
-                    </div>
+      .form-group label i {
+        position: absolute;
+        left: 10px;
+        top: 12px;
+        font-size: 18px;
+        color: #007bff;
+      }
 
-                    <div class="form-group">
-                        <label for="fullname"> <i class="zmdi zmdi-rpassword"></i> </label>
-                        <input type="password" name="conPassword" id="" placeholder="Repeat your password ">
-                        <p class="msg" id="fullNameError"></p>
-                    </div>
+      .form-group input {
+        width: 100%;
+        padding: 12px 12px 12px 40px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+        transition: all 0.3s;
+      }
 
-                    <button class="btn btn-primary" id="registerBtn" type="button">Register</button>
-                </form>
-            </div>
+      .form-group input:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+      }
 
-            <div class="image">
-                <img src="/Quizer/assets/image/image1.png" class="loginImage" alt="login image">
-                <a href="/Quizer/app/login/">I am already member</a>
-            </div>
-        </div>
+      .btn {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 16px;
+      }
+
+      .links {
+        text-align: center;
+        margin-top: 15px;
+      }
+
+      .links a {
+        text-decoration: none;
+        color: #007bff;
+      }
+
+      .links a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div
+        class="card shadow p-4 mx-auto"
+        style="max-width: 500px; border-radius: 20px"
+      >
+        <h2 class="text-center text-primary mb-4">Create Your Account</h2>
+
+        <!-- ✅ Register Form -->
+        <% if(errorMessage){ %>
+        <div class="user-message user-message--error"><%= errorMessage %></div>
+        <% } %>
+        <form action="/register" method="POST">
+          <div class="form-group mb-3">
+            <label>Full Name</label>
+            <input
+              type="text"
+              name="fullName"
+              class="form-control"
+              placeholder="Enter your full name"
+              required
+            />
+          </div>
+
+          <div class="form-group mb-3">
+            <label>Username</label>
+            <input
+              type="text"
+              name="userName"
+              class="form-control"
+              placeholder="Enter username"
+              required
+            />
+          </div>
+
+          <div class="form-group mb-3">
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              class="form-control"
+              placeholder="Enter email"
+              required
+            />
+          </div>
+
+          <div class="form-group mb-3">
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              class="form-control"
+              placeholder="Enter password"
+              required
+            />
+          </div>
+
+          <div class="form-group mb-4">
+            <label>Confirm Password</label>
+            <input
+              type="password"
+              name="conPassword"
+              class="form-control"
+              placeholder="Re-enter password"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">
+            Register
+          </button>
+        </form>
+
+        <p class="text-center mt-3 mb-0">
+          Already have an account?
+          <a href="/login" class="text-decoration-none">Login here</a>
+        </p>
+      </div>
     </div>
+    <!-- ✅ Custom JS -->
+    <script src="/js/jquery-3.6.4.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    
+    <!-- ✅ Bootstrap JS -->
+    <script src="/js/bootstrap.bundle.js"></script>
 
-
-    <script src="/Quizer/assets/bootstrap-v4/bootstrap-4.6.2-dist/js/popper.min.js "></script>
-    <script src="/Quizer/assets/bootstrap-v4/bootstrap-4.6.2-dist/js/jquery-3.6.4.min.js "></script>
-    <script src="/Quizer/assets/bootstrap-v4/bootstrap-4.6.2-dist/js/bootstrap.js "></script>
-
-    <script>
-        document.getElementById("registerBtn").addEventListener("click", async () => {
-            const fullName = document.querySelector("input[name='fullName']").value.trim();
-            const userName = document.querySelector("input[name='userName']").value.trim();
-            const email = document.querySelector("input[name='email']").value.trim();
-            const password = document.querySelector("input[name='password']").value.trim();
-            const conPassword = document.querySelector("input[name='conPassword']").value.trim();
-
-            if (!fullName || !userName || !email || !password || !conPassword) {
-                alert("Please fill in all fields!");
-                return;
-            }
-
-            if (password !== conPassword) {
-                alert("Passwords do not match!");
-                return;
-            }
-
-            try {
-                const res = await fetch("http://localhost:3000/register", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ fullName, userName, email, password, conPassword })
-                });
-
-                const data = await res.json();
-                alert(data.msg || "Registered successfully!");
-                if (data.success) {
-                window.location.href = "../login"; 
-                     } 
-                    }catch (err) {
-                alert("Error: " + err.message);
-                console.log(err.message);
-            }
-        });
-    </script>
-</body>
-
+  </body>
 </html>
